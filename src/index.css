@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+body {
+  font: 16px Helvetica, Arial;
+}
+#sendform {
+  background: white;
+  padding: 5px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+#sendform input {
+  border: solid;
+  padding: 10px;
+  width: 95%;
+  border-radius: 20px;
+  margin-right: 0.25%;
+  border-width: 1px;
+}
+#sendform button {
+  background: rgb(130, 224, 255);
+  border: none;
+  padding: 10px 0 10px 0;
+  border-radius: 20px;
+}
+#messages {
+  margin-bottom: 45px;
+  list-style-type: none;
+  height: 95%;
+  overflow: scroll;
+  flex: 3;
+}
+#messages li {
+  padding: 5px 10px;
+  padding-left: 30px;
+}
+#messages li:nth-child(odd) {
+  background: #eee;
+}
+#online {
+  padding-left: 5px;
+  margin-left: auto;
+  margin-bottom: 45px;
+  flex: 1;
+  list-style: none;
+  overflow: scroll;
+}
+#online li {
+  margin-left: 25px;
+}
+.innermsg {
+  padding-left: 20px;
+}
+#login {
+  display: "";
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 150px;
+  line-height: 3em;
+}
+.update {
+  text-align: center;
+  vertical-align: middle;
+}
