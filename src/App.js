@@ -11,8 +11,10 @@ const Messages = props => props.data.map(m => m[0] !== '' ? (<li><strong>{m[0]}<
 const Online = props => props.data.map(m => <li id={m[0]}>{m[1]}</li>)
 
 export default () => {
-  const [room, setRoom] = useState('');
   const [id, setId] = useState('');
+  const [nameInput, setNameInput] = useState('');
+  const [room, setRoom] = useState('');
+  const [input, setInput] = useState('');
 
   const [socket] = useSocket('https://open-chat-naostsaecf.now.sh');
 	socket.connect();
@@ -58,21 +60,18 @@ export default () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const name = document.querySelector('#name').value.trim();
-    if (!name) {
+    if (!nameInput) {
       return alert("Name can't be empty");
     }
     setId(name);
-    setRoom(document.querySelector('#room').value.trim());
     socket.emit("join", name,room);
   };
 
   const handleSend = e => {
     e.preventDefault();
-    const input = document.querySelector('#m');
-    if(input.value.trim() !== ''){
-      socket.emit('chat message',input.value,room);
-      input.value = '';
+    if(input !== ''){
+      socket.emit('chat message',input,room);
+      setInput('');
     }
   }
 
@@ -82,15 +81,15 @@ export default () => {
       <ul id="online"> 🌐 : <Online data={online} /> </ul>
       <div id="sendform">
         <form onSubmit={e => handleSend(e)} style={{display: 'flex'}}>
-            <input id="m" /><button style={{width:'75px'}} type="submit">Send</button>
+            <input id="m" onChange={e=>setInput(e.target.value.trim())} /><button style={{width:'75px'}} type="submit">Send</button>
         </form>
       </div>
     </section>
   ) : (
     <div style={{ textAlign: 'center', margin: '30vh auto', width: '70%' }}>
       <form onSubmit={event => handleSubmit(event)}>
-        <input id="name" required placeholder="What is your name .." /><br />
-        <input id="room" placeholder="What is your room .." /><br />
+        <input id="name" onChange={e => setNameInput(e.target.value.trim())} required placeholder="What is your name .." /><br />
+        <input id="room" onChange={e => setRoom(e.target.value.trim())} placeholder="What is your room .." /><br />
         <button type="submit">Submit</button>
       </form>
     </div>
