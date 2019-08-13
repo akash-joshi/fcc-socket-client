@@ -63,8 +63,8 @@ export default () => {
     if (!nameInput) {
       return alert("Name can't be empty");
     }
-    setId(name);
-    socket.emit("join", name,room);
+    setId(nameInput);
+    socket.emit("join", nameInput,room);
   };
 
   const handleSend = e => {
